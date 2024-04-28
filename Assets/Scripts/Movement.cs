@@ -15,10 +15,14 @@ public class Movement : MonoBehaviour
     Rigidbody myRigidBody;
     AudioSource myAudioSource;
 
+    int rotation;
+    bool booster;
+
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody>();
         myAudioSource = GetComponent<AudioSource>();
+        rotation = 0;
     }
 
     void Update()
@@ -37,7 +41,7 @@ public class Movement : MonoBehaviour
 
     void ProcessThrust()
     {
-        if (Input.GetKey(KeyCode.W)) { StartThrusting(); }
+        if (Input.GetKey(KeyCode.W) || booster) { StartThrusting(); }
         else { StopThrusting(); }
     }
 
@@ -60,11 +64,11 @@ public class Movement : MonoBehaviour
 
     void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || rotation == -1)
         {
             RotateLeft();
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || rotation == 1)
         {
             RotateRight();
         }
@@ -76,7 +80,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void RotateRight()
+    public void RotateRight()
     {
         ApplyRotation(Vector3.back);
         PlayThrustAudio();
@@ -86,7 +90,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void RotateLeft()
+    public void RotateLeft()
     {
         ApplyRotation(Vector3.forward);
         PlayThrustAudio();
@@ -97,6 +101,16 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void ChangeRotation(int rotationDirection)
+    {
+        rotation = rotationDirection;
+    }
+
+
+    public void ChangeBooster(bool value)
+    {
+        booster = value;
+    }
     private void ApplyRotation(Vector3 vector)
     {
         myRigidBody.freezeRotation = true;

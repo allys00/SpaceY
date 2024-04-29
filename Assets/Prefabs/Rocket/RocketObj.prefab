@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5701828913771996504}
   - component: {fileID: 6649871419523714443}
   - component: {fileID: 6534354786854743910}
-  - component: {fileID: 901626918243855425}
   - component: {fileID: 355508121414461900}
+  - component: {fileID: 901626918243855425}
   - component: {fileID: 6387660461006435093}
   m_Layer: 0
   m_Name: RocketObj
@@ -194,23 +194,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &901626918243855425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792783927405389268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6fd0721604dabc43a45fa24608bf161, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelLoadDelay: 1
-  crashAudio: {fileID: 8300000, guid: d218cebe56ecc4942a6e4148f9ccda97, type: 3}
-  successAudio: {fileID: 8300000, guid: 2a268ab729554674a83afa4b9bd1b55d, type: 3}
-  crashParticles: {fileID: 8296845643006411065}
-  successParticles: {fileID: 5516780413199115182}
 --- !u!136 &355508121414461900
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -234,6 +217,23 @@ CapsuleCollider:
   m_Height: 2.428575
   m_Direction: 1
   m_Center: {x: -0.01623491, y: -0.16255689, z: 0.035933793}
+--- !u!114 &901626918243855425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792783927405389268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6fd0721604dabc43a45fa24608bf161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelLoadDelay: 1
+  crashAudio: {fileID: 8300000, guid: d218cebe56ecc4942a6e4148f9ccda97, type: 3}
+  successAudio: {fileID: 8300000, guid: 2a268ab729554674a83afa4b9bd1b55d, type: 3}
+  crashParticles: {fileID: 8296845643006411065}
+  successParticles: {fileID: 5516780413199115182}
 --- !u!114 &6387660461006435093
 MonoBehaviour:
   m_ObjectHideFlags: 0

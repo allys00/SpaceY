@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem leftBoosterParticle;
     [SerializeField] ParticleSystem rightBoosterParticle;
 
+    readonly private float rotationFuel = 0.3f;
+
     Rigidbody myRigidBody;
     AudioSource myAudioSource;
 
@@ -41,7 +43,18 @@ public class Movement : MonoBehaviour
 
     void ProcessThrust()
     {
-        if (Input.GetKey(KeyCode.W) || booster) { StartThrusting(); }
+        if (Input.GetKey(KeyCode.W) || booster)
+        {
+            bool hasFuel = GameManager.Instance.TryUseFuel(Time.deltaTime);
+            if (hasFuel)
+            {
+                StartThrusting();
+            }
+            else
+            {
+                StopThrusting();
+            }
+        }
         else { StopThrusting(); }
     }
 
@@ -71,17 +84,32 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || rotation == -1)
         {
-            RotateLeft();
+            bool hasFuel = GameManager.Instance.TryUseFuel(Time.deltaTime * rotationFuel);
+            if (hasFuel)
+            {
+                RotateLeft();
+            }
+            else
+            {
+                leftBoosterParticle.Stop();
+            }
         }
         else if (Input.GetKey(KeyCode.D) || rotation == 1)
         {
-            RotateRight();
+            bool hasFuel = GameManager.Instance.TryUseFuel(Time.deltaTime * rotationFuel);
+            if (hasFuel)
+            {
+                RotateRight();
+            }
+            else
+            {
+                rightBoosterParticle.Stop();
+            }
         }
         else
         {
             leftBoosterParticle.Stop();
             rightBoosterParticle.Stop();
-
         }
     }
 

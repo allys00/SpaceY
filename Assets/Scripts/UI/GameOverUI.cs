@@ -1,33 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private Button retryButton;
+    [SerializeField] private Button mainMenuButton;
 
     void Awake()
     {
         retryButton.onClick.AddListener(Retry);
+        mainMenuButton.onClick.AddListener(LoadMainMenu);
     }
 
     void Start()
     {
-        gameObject.SetActive(false);
         GameManager.Instance.OnStateChange += GameManager_OnStateChange;
+        gameObject.SetActive(false);
     }
 
-    void OnDestroy()
+    private void LoadMainMenu()
     {
-        GameManager.Instance.OnStateChange -= GameManager_OnStateChange;
+        GameManager.Instance.LoadMainMenu();
     }
 
     private void Retry()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        GameManager.Instance.RetryCurrentLevel();
     }
 
     private void GameManager_OnStateChange(object sender, System.EventArgs e)

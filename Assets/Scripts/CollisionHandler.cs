@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-
-    [SerializeField] float levelLoadDelay = 1f;
     [SerializeField] AudioClip crashAudio;
     [SerializeField] AudioClip successAudio;
 

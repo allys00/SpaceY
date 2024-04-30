@@ -28,7 +28,7 @@ public class CollisionHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            LoadNextLevel();
+            GameManager.Instance.LoadNextLevel();
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
@@ -62,7 +62,7 @@ public class CollisionHandler : MonoBehaviour
         myAudioSource.PlayOneShot(crashAudio, .5f);
         crashParticles.Play();
         GetComponent<Movement>().enabled = false;
-        Invoke("ReloadLevel", levelLoadDelay);
+        GameManager.Instance.SetToGameOver();
     }
 
     void StartSuccessSequence()
@@ -72,24 +72,6 @@ public class CollisionHandler : MonoBehaviour
         successParticles.Play();
         myAudioSource.PlayOneShot(successAudio);
         GetComponent<Movement>().enabled = false;
-        Invoke("LoadNextLevel", levelLoadDelay);
-    }
-    void ReloadLevel()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
-    }
-
-    void LoadNextLevel()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-        if (SceneManager.sceneCountInBuildSettings == nextSceneIndex)
-        {
-            nextSceneIndex = 0;
-        }
-
-        SceneManager.LoadScene(nextSceneIndex);
-
+        GameManager.Instance.SetToFinished();
     }
 }

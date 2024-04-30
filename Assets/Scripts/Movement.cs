@@ -47,6 +47,11 @@ public class Movement : MonoBehaviour
 
     void StartThrusting()
     {
+        // Start's the timer as soon as the player makes a move.
+        if (GameManager.Instance.GetState() == GameManager.State.Ready)
+        {
+            GameManager.Instance.SetToPlaying();
+        }
         myRigidBody.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
         PlayThrustAudio();
 
